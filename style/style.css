@@ -17,7 +17,7 @@ body {
 
 .wrapper {
     width: 770px;
-    padding: 35px;
+    padding: 35px 35px 0;
     background: #fff;
     border-radius: 10px;
 }
@@ -106,11 +106,15 @@ body {
     font-size: 16px;
     border-radius: 5px;
     background: #17a2b8;
-    transition: transform 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .content button:active {
     transform: scale(0.9);
+}
+
+.content button:hover {
+    background: #107886;
 }
 
 .content .result-details {
@@ -147,4 +151,23 @@ body {
 
 .result-details li b {
     font-weight: 500;
+}
+
+#volumeControl {
+    padding: 10px;
+    margin: 10px;
+    color: #fff;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    background: #17a2b8;
+    transition: 0.3s ease;
+}
+
+#volumeControl:active {
+    transform: scale(0.9);
+}
+
+#volumeControl:hover {
+    background: #107886;
 }

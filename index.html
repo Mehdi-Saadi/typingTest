@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
     <title>typingTest</title>
 </head>
 <body>
 <div class="wrapper">
+    <!-- playing audio if user enables -->
+    <audio id="audio">
+        <source src="./soundEffect/7.mp3" type="audio/mpeg"> Your browser does not support the audio element.
+    </audio>
+    <!-- getting user data -->
     <input type="text" class="input-field">
+
     <div class="content-box">
         <div class="typing-text">
+            <!-- the updated text goes here -->
             <p></p>
         </div>
         <div class="content">
@@ -35,6 +43,7 @@
             <button>Try Again</button>
         </div>
     </div>
+    <button id="volumeControl" class="material-symbols-outlined">volume_up</button>
 </div>
 
 <script src="js/paragraphs.js"></script>

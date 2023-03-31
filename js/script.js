@@ -1,20 +1,26 @@
 const typingText = document.querySelector(".typing-text p") ,
-inpField = document.querySelector(".wrapper .input-field") ,
-timeTag = document.querySelector(".time span b") ,
-mistakeTag = document.querySelector(".mistake span") ,
-wpmTag = document.querySelector(".wpm span") ,
-cpmTag = document.querySelector(".cpm span") ,
-tryAgainBtn = document.querySelector("button");
+    inpField = document.querySelector(".wrapper .input-field") ,
+    timeTag = document.querySelector(".time span b") ,
+    mistakeTag = document.querySelector(".mistake span") ,
+    wpmTag = document.querySelector(".wpm span") ,
+    cpmTag = document.querySelector(".cpm span") ,
+    tryAgainBtn = document.querySelector("button") ,
+    audio = document.getElementById("audio") ,
+    volumeControl = document.getElementById('volumeControl');
 
-let timer,
-maxTime = 60,
-timeLeft = maxTime,
-charIndex = mistakes = isTyping = 0;
+let timer ,
+    maxTime = 60 ,
+    timeLeft = maxTime ,
+    charIndex = mistakes = isTyping = 0 ,
+    randIndex ,
+    spanTag ,
+    typedChar ,
+    wpm;
 
 function randomParagraph() {
 
     // getting random number, and it'll always less than the paragraphs length
-    let randIndex = Math.floor(Math.random() * paragraphs.length);
+    randIndex = Math.floor(Math.random() * paragraphs.length);
 
     // set text empty
     typingText.innerHTML = "";
@@ -22,7 +28,7 @@ function randomParagraph() {
     // getting random item from the paragraphs array, splitting all characters
     // of it, adding each character inside span and then adding this span inside p tag
     paragraphs[randIndex].split("").forEach(span => {
-       let spanTag = `<span>${span}</span>`;
+       spanTag = `<span>${span}</span>`;
        typingText.innerHTML += spanTag;
     });
 
@@ -35,7 +41,7 @@ function randomParagraph() {
 
 function initTyping() {
     const characters = typingText.querySelectorAll("span");
-    let typedChar = inpField.value.split("")[charIndex];
+    typedChar = inpField.value.split("")[charIndex];
 
     if (charIndex < characters.length - 1 && timeLeft > 0) {
         // once timer is start, it won't restart again on every key clicked
@@ -71,7 +77,7 @@ function initTyping() {
         characters.forEach(span => span.classList.remove("active"));
         characters[charIndex].classList.add("active");
 
-        let wpm = Math.round((((charIndex - mistakes) / 5) / (maxTime - timeLeft)) * 60);
+        wpm = Math.round((((charIndex - mistakes) / 5) / (maxTime - timeLeft)) * 60);
 
         // if wpm value is 0, empty, or infinity them setting its value to 0
         wpm = wpm < 0 || !wpm || wpm === Infinity ? 0 : wpm;
@@ -111,5 +117,23 @@ function reset() {
 }
 
 randomParagraph();
+
+// sound effect on click
+volumeControl.onclick = function () {
+
+    // Update the Button
+    // and turn on or off the sound
+    if (volumeControl.innerHTML === 'volume_off') {
+        volumeControl.innerHTML = 'volume_up';
+        audio.volume = 1;
+    } else {
+        volumeControl.innerHTML = 'volume_off';
+        audio.volume = 0;
+    }
+};
+document.addEventListener('keydown' , function () {
+    audio.play();
+});
+
 inpField.addEventListener("input" , initTyping);
 tryAgainBtn.addEventListener("click" , reset);
